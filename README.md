@@ -2,6 +2,10 @@
 
 Práctica de CaféCat con Angular 19 Standalone y una API de Node.js 22 y Express 5. El catálogo, la sesión de prueba y el carrito se muestran en una sola vista con controles nativos. En local, el frontend se sirve **compilado con Live Server de VS Code** y Express atiende la API en otro proceso. Para internet, GitHub Pages sirve Angular y un servicio externo ejecuta Express con PostgreSQL.
 
+**Aplicación publicada:** [CaféCat en GitHub Pages](https://daniloerazo07.github.io/Tarea-Backend/).
+
+**API publicada:** [comprobación de salud en Render](https://tarea-backend-api-daniloerazo07.onrender.com/api/health). La variable `API_BASE_URL` ya apunta a `https://tarea-backend-api-daniloerazo07.onrender.com/api`. [Despliegue aprobado en Actions](https://github.com/daniloerazo07/Tarea-Backend/actions/runs/42505314251) y [evidencia de verificación](docs/evidencia-despliegue.json).
+
 ## Publicación en GitHub Pages y Render
 
 Repositorio: [daniloerazo07/Tarea-Backend](https://github.com/daniloerazo07/Tarea-Backend).

@@ -1,0 +1,49 @@
+{
+  "verificadoEn": "2026-11-08T17:33:25.654Z",
+  "sitio": "https://daniloerazo07.github.io/Tarea-Backend/",
+  "api": "https://tarea-backend-api-daniloerazo07.onrender.com/api",
+  "workflow": "https://github.com/daniloerazo07/Tarea-Backend/actions/runs/42505314251",
+  "frontend": {
+    "status": 200,
+    "baseHref": "/Tarea-Backend/",
+    "archivos": [
+      {
+        "archivo": "polyfills-5CFQRCPP.js",
+        "status": 200,
+        "tipo": "application/javascript; charset=utf-8"
+      },
+      {
+        "archivo": "main-AXZBYQBM.js",
+        "status": 200,
+        "tipo": "application/javascript; charset=utf-8"
+      },
+      {
+        "archivo": "styles-5INURTSO.css",
+        "status": 200,
+        "tipo": "text/css; charset=utf-8"
+      }
+    ],
+    "configuracion": 200
+  },
+  "integracionApi": {
+    "verificadoEn": "2026-11-08T17:30:54.330Z",
+    "api": "https://tarea-backend-api-daniloerazo07.onrender.com/api",
+    "origen": "https://daniloerazo07.github.io",
+    "health": 200,
+    "catalogo": 200,
+    "preflight": 204,
+    "sesion": 200,
+    "pedido": {
+      "status": 201,
+      "respuesta": {
+        "status": "ok",
+        "data": {
+          "orderId": 1,
+          "fecha": "2026-11-08T17:30:07.600Z",
+          "estado": "creado"
+        }
+      }
+    }
+  },
+  "alcance": "Pruebas de Angular y PostgreSQL en Actions más comprobación HTTP de la publicación, CORS, sesión y pedido real; sin recorrido visual automatizado."
+}

@@ -1,5 +1,15 @@
 # Informe de verificación
 
+## Publicación comprobada — 8 de noviembre de 2026, 12:33 (Ecuador)
+
+- Sitio: https://daniloerazo07.github.io/Tarea-Backend/
+- API: https://tarea-backend-api-daniloerazo07.onrender.com/api
+- [Actions de publicación](https://github.com/daniloerazo07/Tarea-Backend/actions/runs/42505314251): `build` y `deploy` completados correctamente.
+- Verificación HTTP pública: página, JavaScript, CSS y configuración de API con `200`; base `/Tarea-Backend/` y dirección real de Render correctas.
+- API real: health y catálogo `200`, preflight CORS `204`, sesión `200` y pedido de prueba `201`, identificador `1`. No se guardaron tokens en la evidencia.
+- Alcance: pruebas automatizadas en Actions y verificación HTTP de los servicios publicados. No se afirma haber completado un recorrido visual automatizado del navegador.
+- Evidencia: [evidencia-despliegue.json](evidencia-despliegue.json).
+
 ## Preparación de GitHub Pages y API externa — 8 de noviembre de 2026
 
 - Compilación de producción actual: aprobada, 275.37 kB iniciales.
