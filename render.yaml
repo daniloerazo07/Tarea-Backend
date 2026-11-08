@@ -1,0 +1,34 @@
+# Ambos recursos usan Free. PostgreSQL gratuito expira a los 30 días.
+services:
+  - type: web
+    name: tarea-backend-api-daniloerazo07
+    runtime: node
+    plan: free
+    repo: https://github.com/daniloerazo07/Tarea-Backend
+    branch: main
+    rootDir: backend
+    buildCommand: npm ci --omit=dev
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 22.23.4
+      - key: NODE_ENV
+        value: production
+      - key: HOST
+        value: 0.0.0.0
+      - key: FRONTEND_ORIGIN
+        value: https://daniloerazo07.github.io
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: tarea-backend-db-daniloerazo07
+          property: connectionString
+
+databases:
+  - name: tarea-backend-db-daniloerazo07
+    plan: free
+    databaseName: cafecat
+    user: cafecat
+    ipAllowList: []

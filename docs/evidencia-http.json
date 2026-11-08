@@ -1,0 +1,51 @@
+{
+  "verificadoEn": "2026-11-08T17:05:13.550Z",
+  "origen": "http://127.0.0.1:5500",
+  "comprobacion": "HTTP contra la extensión Live Server de VS Code y Express; sin automatización visual del navegador",
+  "frontend": {
+    "status": 200,
+    "scripts": [
+      "polyfills-5CFQRCPP.js",
+      "main-C6I43J66.js"
+    ]
+  },
+  "catalogo": {
+    "ruta": "/api/productos",
+    "status": 200
+  },
+  "sesion": {
+    "ruta": "/api/sesion",
+    "status": 200,
+    "cookie": {
+      "path": "/api",
+      "httpOnly": true,
+      "sameSite": "lax"
+    }
+  },
+  "pedido": {
+    "ruta": "/api/pedidos",
+    "status": 201,
+    "respuesta": {
+      "status": "ok",
+      "data": {
+        "orderId": 3,
+        "fecha": "2026-11-08T17:05:13.515Z",
+        "estado": "creado"
+      }
+    },
+    "guardado": {
+      "id": 3,
+      "fecha": "2026-11-08T17:05:13.515Z",
+      "estado": "creado",
+      "usuarioId": 1,
+      "items": [
+        1
+      ]
+    }
+  },
+  "errores": {
+    "sinSesion": 401,
+    "jsonMalFormado": 400,
+    "rutaInexistente": 404
+  }
+}

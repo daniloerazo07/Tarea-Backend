@@ -1,0 +1,39 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Angular: compilar producción",
+      "type": "shell",
+      "command": ".\\scripts\\npm-local.cmd",
+      "args": ["run", "build", "--", "--configuration", "production"],
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": [],
+      "options": { "cwd": "${workspaceFolder}" }
+    },
+    {
+      "label": "Express: iniciar API",
+      "type": "shell",
+      "command": ".\\scripts\\npm-local.cmd",
+      "args": ["start"],
+      "isBackground": true,
+      "problemMatcher": [],
+      "options": { "cwd": "${workspaceFolder}" }
+    },
+    {
+      "label": "Verificar: Angular",
+      "type": "shell",
+      "command": ".\\scripts\\npm-local.cmd",
+      "args": ["test"],
+      "problemMatcher": [],
+      "options": { "cwd": "${workspaceFolder}" }
+    },
+    {
+      "label": "Verificar: API",
+      "type": "shell",
+      "command": ".\\scripts\\npm-local.cmd",
+      "args": ["run", "test:api"],
+      "problemMatcher": [],
+      "options": { "cwd": "${workspaceFolder}" }
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "fecha": "2026-11-08T04:22:20.523Z",
+    "estado": "creado",
+    "usuarioId": 1,
+    "items": [
+      1
+    ]
+  },
+  {
+    "id": 2,
+    "fecha": "2026-11-08T04:28:09.863Z",
+    "estado": "creado",
+    "usuarioId": 1,
+    "items": [
+      1
+    ]
+  },
+  {
+    "id": 3,
+    "fecha": "2026-11-08T17:05:13.515Z",
+    "estado": "creado",
+    "usuarioId": 1,
+    "items": [
+      1
+    ]
+  }
+]

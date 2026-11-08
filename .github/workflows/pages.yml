@@ -1,0 +1,88 @@
+name: Pruebas y GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_DB: cafecat_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: prueba_local_ci
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      TEST_DATABASE_URL: postgres://postgres:prueba_local_ci@localhost:5432/cafecat_test
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            backend/package-lock.json
+      - name: Instalar Angular
+        run: npm ci
+      - name: Instalar Express
+        run: npm ci --prefix backend
+      - name: Probar API, CORS, sesiones y persistencia
+        run: npm run test:api
+      - name: Probar Angular
+        run: npm test
+        env:
+          CHROME_BIN: /usr/bin/google-chrome
+      - name: Compilar aplicación
+        if: github.event_name == 'pull_request' || vars.API_BASE_URL == ''
+        run: npm run build -- --configuration production --base-href /Tarea-Backend/ --output-path dist/pages
+      - name: Compilar para GitHub Pages
+        if: github.event_name != 'pull_request' && vars.API_BASE_URL != ''
+        run: npm run build:pages
+        env:
+          API_BASE_URL: ${{ vars.API_BASE_URL }}
+      - name: Preparar Pages
+        if: github.event_name != 'pull_request' && vars.API_BASE_URL != ''
+        uses: actions/configure-pages@v5
+      - name: Guardar aplicación compilada
+        if: github.event_name != 'pull_request' && vars.API_BASE_URL != ''
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist/pages/browser
+      - name: Informar configuración pendiente
+        if: github.event_name != 'pull_request' && vars.API_BASE_URL == ''
+        run: echo 'Pruebas completadas. La publicación espera la variable API_BASE_URL con la URL real de Express.' >> "$GITHUB_STEP_SUMMARY"
+
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && vars.API_BASE_URL != ''
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publicar GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

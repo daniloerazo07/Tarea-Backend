@@ -1,0 +1,49 @@
+<main *ngIf="carrito.vista$ | async as vm">
+  <header>
+    <p>CaféCat SPA</p>
+    <h1>{{ titulo }}</h1>
+  </header>
+
+  <section aria-labelledby="sesion-titulo" [attr.aria-busy]="vm.iniciandoSesion">
+    <h2 id="sesion-titulo">Sesión de prueba</h2>
+    <p *ngIf="vm.usuario">Sesión activa: {{ vm.usuario.nombre }} ({{ vm.usuario.rol }}).</p>
+    <p *ngIf="!vm.usuario">Inicia sesión para enviar tu pedido.</p>
+    <button *ngIf="!vm.usuario" type="button"
+      [disabled]="vm.iniciandoSesion || vm.enviandoPedido" (click)="carrito.iniciarSesion()">
+      Iniciar sesión de prueba
+    </button>
+    <p *ngIf="vm.iniciandoSesion" role="status">Iniciando sesión…</p>
+  </section>
+
+  <section aria-labelledby="catalogo-titulo" [attr.aria-busy]="vm.cargandoProductos">
+    <h2 id="catalogo-titulo">Catálogo</h2>
+    <p *ngIf="vm.cargandoProductos" role="status">Cargando productos…</p>
+    <div *ngIf="vm.errorCatalogo" role="alert">
+      <p>{{ vm.errorCatalogo }}</p>
+      <button type="button" [disabled]="vm.enviandoPedido" (click)="cargarProductos()">Reintentar carga</button>
+    </div>
+    <p *ngIf="!vm.cargandoProductos && !vm.errorCatalogo && !vm.productos.length">No hay productos disponibles.</p>
+    <ng-container *ngIf="!vm.cargandoProductos && !vm.errorCatalogo">
+      <app-producto-card *ngFor="let p of vm.productos" [producto]="p"
+        [bloqueado]="vm.enviandoPedido" (agregar)="carrito.agregar($event)" />
+    </ng-container>
+  </section>
+
+  <section aria-labelledby="carrito-titulo" [attr.aria-busy]="vm.enviandoPedido">
+    <h2 id="carrito-titulo">Carrito</h2>
+    <p *ngIf="!vm.cantidad">El carrito está vacío.</p>
+    <ul *ngIf="vm.cantidad">
+      <li *ngFor="let linea of vm.lineas">
+        {{ linea.producto.nombre }} — Cantidad: {{ linea.cantidad }} —
+        Subtotal: {{ linea.subtotal | currency:'USD':'symbol':'1.2-2' }}
+      </li>
+    </ul>
+    <p>Unidades: {{ vm.cantidad }}</p>
+    <p><strong>Total: {{ vm.total | currency:'USD':'symbol':'1.2-2' }}</strong></p>
+    <button type="button" [disabled]="vm.enviandoPedido || vm.iniciandoSesion" (click)="carrito.enviarPedido()">Enviar pedido</button>
+    <p *ngIf="vm.enviandoPedido" role="status">Enviando pedido…</p>
+  </section>
+
+  <p *ngIf="vm.error" role="alert">{{ vm.error }}</p>
+  <p *ngIf="vm.mensaje" role="status">{{ vm.mensaje }}</p>
+</main>
