@@ -5,7 +5,8 @@
 - Compilación de producción actual: aprobada, 275.37 kB iniciales.
 - Angular: **15 aprobadas**; incluye conexión a la API externa, token de sesión y limpieza ante `401`.
 - Express con archivos JSON aislados: **17 aprobadas**; incluye CORS del dominio de Pages, preflight y sesión Bearer sin cookies de terceros.
-- PostgreSQL: prueba de integración añadida; requiere `TEST_DATABASE_URL` y se ejecuta en GitHub Actions con PostgreSQL 17. Omitida en el equipo local porque no hay una base de prueba configurada.
+- PostgreSQL: integración aprobada en GitHub Actions con PostgreSQL 17 real. Verifica guardado, 20 pedidos simultáneos y conservación de datos al reiniciar Express. Requiere `TEST_DATABASE_URL`; se omite en el equipo local porque no hay una base de prueba configurada.
+- [Primera ejecución de Actions](https://github.com/daniloerazo07/Tarea-Backend/actions/runs/42504226893): completada correctamente, incluida instalación desde ambos lockfiles, API con PostgreSQL, Angular y compilación para `/Tarea-Backend/`.
 - Los YAML del workflow y del Blueprint de Render se validaron sintácticamente.
 - La publicación espera una API externa real y la variable `API_BASE_URL`; no se ha sustituido Express por una simulación del navegador.
 
